@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Funnel</string>
+    <string name="header_good_morning">Good morning</string>
+    <string name="header_good_afternoon">Good afternoon</string>
+    <string name="header_good_evening">Good evening</string>
+    <string name="header_good_night">Good night</string>
+</resources>

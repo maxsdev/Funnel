@@ -5,14 +5,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
+import kotlinx.coroutines.flow.flowOf
 import ru.maxsdev.api.dto.ArticleDto
 import ru.maxsdev.api.model.ArticleSource
 import ru.maxsdev.theme.DividerColor
@@ -20,13 +23,13 @@ import ru.maxsdev.theme.FunnelTheme
 import ru.maxsdev.top_headlines.headline.Headline
 
 @Composable
-fun TopHeadlinesList(articles: List<ArticleDto>) {
+fun TopHeadlinesList(articles: LazyPagingItems<ArticleDto>) {
     FunnelTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            LazyColumn() {
+            LazyColumn {
                 items(items = articles, key = { it.url ?: "" }) { article ->
                     Spacer(modifier = Modifier.height(24.dp))
-                    Headline(article)
+                    Headline(article!!)
                     Spacer(modifier = Modifier.height(24.dp))
                     Divider(thickness = 1.dp, color = DividerColor, modifier = Modifier.padding(horizontal = 24.dp))
                 }
@@ -65,5 +68,6 @@ private fun TopHeadlinesListPreview() {
             content = "Comment on this story\r\nSINGAPORE The wait is over. And its a comeback.\r\nNearly a week after Malaysias general election resulted in a hung parliament, longtime opposition leader Anwar Ibrahim appears … [+7399 chars]"
         )
     )
-    TopHeadlinesList(mockList)
+    val articles = flowOf(PagingData.from(mockList)).collectAsLazyPagingItems()
+    TopHeadlinesList(articles)
 }

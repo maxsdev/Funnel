@@ -8,6 +8,7 @@ interface NewsAPI {
     @GET("top-headlines")
     suspend fun topHeadlines(
         @Query("country") country: String,
-        @Query("apiKey") apiKey: String
+        @Query("apiKey") apiKey: String,
+        @Query("page") page: Int
     ): ArticlesDto
 }

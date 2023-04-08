@@ -6,11 +6,10 @@ plugins {
 
 android {
     namespace = "ru.maxsdev.top_headlines"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -23,17 +22,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.asProvider().get()
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "19"
     }
 }
 
@@ -42,9 +41,14 @@ dependencies {
     implementation(project(mapOf("path" to ":core:api")))
     implementation(project(mapOf("path" to ":core:theme")))
 
+    implementation(libs.paging)
+    implementation(libs.paging.compose)
+
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.livedata.ktx)
+
+    implementation(libs.compose.compiler)
 
     implementation(libs.navigation.compose)
 

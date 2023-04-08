@@ -9,32 +9,33 @@ android {
     defaultConfig {
         applicationId = "ru.maxsdev.funnel"
         minSdk = 26
-        targetSdk = 33
+
         versionCode = 1
         versionName = "1.0"
+
         vectorDrawables {
             useSupportLibrary = true
         }
     }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "19"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.asProvider().get()
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -66,6 +67,7 @@ dependencies {
     implementation(libs.compose.tooling)
     implementation(libs.compose.material3)
     implementation(libs.compose.activity)
+    implementation(libs.compose.compiler)
 
     implementation(libs.navigation.compose)
 
@@ -77,6 +79,6 @@ dependencies {
     implementation(libs.okhttp3.interceptor.logging)
 
     testImplementation(libs.junit)
-    testImplementation("org.mockito:mockito-core:5.0.0")
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.core.testing)
 }

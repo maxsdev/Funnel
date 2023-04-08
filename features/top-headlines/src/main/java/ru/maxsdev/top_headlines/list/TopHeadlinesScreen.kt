@@ -1,8 +1,9 @@
 package ru.maxsdev.top_headlines.list
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import ru.maxsdev.api.model.Category
+import androidx.paging.compose.collectAsLazyPagingItems
 import ru.maxsdev.di.ViewModelBuilder
 import ru.maxsdev.di.lazyViewModel
 import ru.maxsdev.top_headlines.di.DaggerTopHeadlinesComponent
@@ -15,8 +16,14 @@ fun TopHeadlinesScreen(
     navController: NavController
 ) {
     val viewModel = viewModelBuilder.diViewModel(dependencies)
-    val uiState = viewModel.uiState
-    TopHeadlinesList(articles = uiState.articles)
+    val articles = viewModel.news().collectAsLazyPagingItems()
+
+    Log.d("TESTLOG", "load state: ${articles.loadState}")
+//    if (articles.loadState.refresh is LoadState.Loading) {
+//        LoadingStateView()
+//    } else {
+    TopHeadlinesList(articles = articles)
+//    }
 }
 
 private fun ViewModelBuilder.diViewModel(

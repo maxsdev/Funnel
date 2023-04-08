@@ -4,21 +4,23 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven {
+            url = java.net.URI.create("https://jitpack.io")
+        }
     }
 }
 
-enableFeaturePreview("VERSION_CATALOGS")
 rootProject.name = "Funnel"
 
 include(":app")
-include(":core")
 include(":features")
 include(":features:top-headlines")
+include(":features:article")
+include(":core")
+include(":core:navigation")
 include(":core:api")
 include(":core:theme")
 include(":core:di")
-include(":core:navigation")
-include(":features:article")
 include(":core:database")
 include(":core:resources")
 include(":core:base")

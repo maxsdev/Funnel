@@ -1,4 +1,4 @@
-package ru.maxsdev.funnel.ui.theme
+package ru.maxsdev.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

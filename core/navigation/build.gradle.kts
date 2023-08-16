@@ -1,34 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+  id("ru.maxsdev.android.library.compose")
 }
 
 android {
-    namespace = "ru.maxsdev.navigation"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_19
-        targetCompatibility = JavaVersion.VERSION_19
-    }
-    kotlinOptions {
-        jvmTarget = "19"
-    }
+  namespace = "ru.maxsdev.navigation"
 }
 
 dependencies {
-    implementation(libs.navigation.compose)
+  implementation(libs.navigation.compose)
 }

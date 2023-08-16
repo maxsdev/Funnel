@@ -1,5 +1,6 @@
 pluginManagement {
-    includeBuild("plugins")
+//    includeBuild("plugins")
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         google()
@@ -24,3 +25,4 @@ include(":core:di")
 include(":core:database")
 include(":core:resources")
 include(":core:base")
+include(":navigation")

@@ -1,61 +1,41 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-kapt")
-    id("org.jetbrains.kotlin.android")
+  id("ru.maxsdev.android.feature")
+  id("ru.maxsdev.android.library.compose")
 }
 
 android {
-    namespace = "ru.maxsdev.top_headlines"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_19
-        targetCompatibility = JavaVersion.VERSION_19
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.asProvider().get()
-    }
-    kotlinOptions {
-        jvmTarget = "19"
-    }
+  namespace = "ru.maxsdev.top_headlines"
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":core:di")))
-    implementation(project(mapOf("path" to ":core:api")))
-    implementation(project(mapOf("path" to ":core:theme")))
+  implementation(project(mapOf("path" to ":core:di")))
+  implementation(project(mapOf("path" to ":core:api")))
+  implementation(project(mapOf("path" to ":core:theme")))
 
-    implementation(libs.paging)
-    implementation(libs.paging.compose)
+  implementation(libs.paging)
+  implementation(libs.paging.compose)
 
-    implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.lifecycle.livedata.ktx)
+  implementation(libs.lifecycle.viewmodel.compose)
+  implementation(libs.lifecycle.viewmodel.ktx)
+  implementation(libs.lifecycle.livedata.ktx)
 
-    implementation(libs.compose.compiler)
+  implementation(libs.compose.compiler)
 
-    implementation(libs.navigation.compose)
+  implementation(libs.navigation.compose)
 
-    implementation(libs.coil.compose)
+  implementation(libs.coil.compose)
 
-    implementation(libs.bundles.compose)
+  implementation(libs.bundles.compose)
 
-    implementation(libs.dagger.dagger)
-    kapt(libs.dagger.compiler)
+  implementation(libs.kotlinx.immutable.collections)
+
+  implementation(libs.dagger.dagger)
+  kapt(libs.dagger.compiler)
+
+  implementation(libs.mvikotlin.core)
+  implementation(libs.mvikotlin.main)
+  implementation(libs.mvikotlin.coroutines)
+
+  implementation(libs.decompose.core)
+  implementation(libs.decompose.compose.jetbrains)
 }
